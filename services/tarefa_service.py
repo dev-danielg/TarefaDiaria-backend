@@ -6,17 +6,15 @@ class TarefaService:
     
     def __init__(self, repository: TarefaRepository) -> None:
         self.repository = repository
-        
     
-    def cadastrar(self, dados: dict, id_usuario: int):
+    
+    def cadastrar(self, dados: dict, id_usuario: int) -> Tarefa:
         titulo = dados.get("titulo")
         descricao = dados.get("descricao")
             
         if not titulo:
             raise ValueError("Tarefa deve conter ao menos o título.")
-        
-        if descricao and not titulo:
-            raise ValueError("Tarefa não pode ter descrição sem nenhum título.")
+
         
         tarefa = Tarefa(titulo=titulo,
                         descricao=descricao,
@@ -25,10 +23,10 @@ class TarefaService:
         
         try:
             self.repository.cadastrar(tarefa)
-            self.repository.session.commit()
+            self.repository.commit()
             return tarefa
         
         except Exception:
-            self.repository.session.rollback()
+            self.repository.rollback()
             raise
         

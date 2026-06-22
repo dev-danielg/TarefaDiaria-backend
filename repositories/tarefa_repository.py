@@ -29,5 +29,13 @@ class TarefaRepository:
     
     
     def atualizar(self, tarefa: Tarefa) -> None:
-        self.session.add(tarefa)
+        self.session.merge(tarefa)
+    
+    
+    def commit(self) -> None:
+        self.session.commit()
+    
+    
+    def rollback(self) -> None:
+        self.session.rollback()
         
