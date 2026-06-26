@@ -1,0 +1,1 @@
+from .tarefa_controller import TarefaController

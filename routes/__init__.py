@@ -1,0 +1,1 @@
+from .tarefa_route import bp as bp_tarefa
