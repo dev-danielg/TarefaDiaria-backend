@@ -9,5 +9,5 @@ class Usuario(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     nome: Mapped[str] = mapped_column(String(150), nullable=False)
     email: Mapped[str] = mapped_column(String(150), nullable=False)
-    senha_hash: Mapped[int] = mapped_column(String(300), nullable=False)
+    senha_hash: Mapped[str] = mapped_column(String(300), nullable=False)
     
