@@ -20,10 +20,10 @@ class TarefaController:
                 "message": str(e)
             }, 400
             
-        except Exception as e:
+        except Exception:
             return {
                 "success": False,
-                "message": str(e)
+                "message": "Erro interno no servidor"
             }, 500
         
         return {

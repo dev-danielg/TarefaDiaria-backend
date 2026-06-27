@@ -4,6 +4,7 @@ from extensions import Base
 
 
 class Usuario(Base):
+    
     __tablename__ = "usuario"
     
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

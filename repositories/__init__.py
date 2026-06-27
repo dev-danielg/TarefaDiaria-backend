@@ -1,1 +1,2 @@
 from .tarefa_repository import TarefaRepository
+from .usuario_repository import UsuarioRepository

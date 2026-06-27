@@ -28,5 +28,5 @@ class TarefaService:
         
         except Exception:
             self.repository.rollback()
-            raise Exception("Erro interno no servidor.")
+            raise
         

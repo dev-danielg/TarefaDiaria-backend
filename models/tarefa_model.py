@@ -4,6 +4,7 @@ from extensions import Base
 
 
 class Tarefa(Base):
+    
     __tablename__ = "tarefa"
     
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
