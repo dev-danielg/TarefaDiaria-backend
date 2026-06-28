@@ -1,1 +1,2 @@
 from .tarefa_controller import TarefaController
+from .usuario_controller import UsuarioController
