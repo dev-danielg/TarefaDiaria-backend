@@ -5,10 +5,10 @@ from flask import Blueprint
 from extensions import db
 
 
-bp = Blueprint("usuario", __name__, "/api/usuarios")
+bp = Blueprint("usuario", __name__, url_prefix="/api/usuarios")
 
 
-bp.route("", methods=["POST"])
+@bp.route("", methods=["POST"])
 def cadastrar():
     repository = UsuarioRepository(db.session)
     service = UsuarioService(repository)

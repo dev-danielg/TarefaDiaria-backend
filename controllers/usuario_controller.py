@@ -16,7 +16,7 @@ class UsuarioController:
         
         except ValueError as e:
             return {
-                "success": True,
+                "success": False,
                 "message": str(e)
             }, 400
         
