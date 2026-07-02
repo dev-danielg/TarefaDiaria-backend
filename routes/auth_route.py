@@ -5,7 +5,7 @@ from controllers import AuthController
 from extensions import db
 
 
-bp = Blueprint("login", __name__, url_prefix="/api/auth")
+bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
 
 @bp.route("/login", methods=["POST"])
