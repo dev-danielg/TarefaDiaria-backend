@@ -19,7 +19,7 @@ class TarefaService:
         tarefa = Tarefa(titulo=titulo,
                         descricao=descricao,
                         concluida=False,
-                        usuario_id=id_usuario)
+                        id_usuario=id_usuario)
         
         try:
             self.repository.cadastrar(tarefa)
