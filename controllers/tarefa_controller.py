@@ -31,10 +31,32 @@ class TarefaController:
             "message": "Tarefa criada com sucesso.",
             "data": {
                 "id": tarefa.id,
-                "usuario_id": tarefa.id_usuario,
+                "id_usuario": tarefa.id_usuario,
                 "titulo": tarefa.titulo,
                 "descricao": tarefa.descricao,
                 "concluida": tarefa.concluida
             }
         }, 201
+        
+    def buscar_todos(self) -> tuple[dict[str, str | object], int]:
+        try:
+            tarefas = self.service.buscar_todos(int(get_jwt_identity()))
+            
+        except Exception:
+            return {
+                "success": False,
+                "message": "Erro interno no servidor.",
+            }, 500
+        
+        return {
+            "success": True,
+            "message": "Busca realizada com sucesso.",
+            "data": [{
+                "id": tarefa.id,
+                "id_usuario": tarefa.id_usuario,
+                "titulo": tarefa.titulo,
+                "descricao": tarefa.descricao,
+                "concluida": tarefa.concluida
+            } for tarefa in tarefas]
+        }, 200
         

@@ -1,5 +1,7 @@
 from models import Tarefa
 from repositories import TarefaRepository
+from typing import Sequence
+from models import Tarefa
 
 
 class TarefaService:
@@ -30,3 +32,12 @@ class TarefaService:
             self.repository.rollback()
             raise
         
+        
+    def buscar_todos(self, id_usuario: int) -> Sequence[Tarefa]:
+        try:
+            tarefas = self.repository.buscar_todos(id_usuario)
+            return tarefas
+        
+        except Exception:
+            raise
+            

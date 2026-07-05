@@ -16,3 +16,12 @@ def cadastrar():
     service = TarefaService(repository)
     controller = TarefaController(repository, service)
     return controller.cadastrar()
+
+
+@bp.route("", methods=["GET"])
+@jwt_required()
+def buscar_todos():
+    repository = TarefaRepository(db.session)
+    service = TarefaService(repository)
+    controller = TarefaController(repository, service)
+    return controller.buscar_todos()
