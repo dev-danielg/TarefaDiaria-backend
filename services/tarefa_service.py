@@ -40,4 +40,16 @@ class TarefaService:
         
         except Exception:
             raise
+    
+    def buscar_por_id(self, id_usuario: int):
+        tarefa = self.repository.buscar_por_id(id_usuario)
+        
+        if not tarefa:
+            raise LookupError("Tarefa específica não encontrada.")
+        
+        try:
+            return tarefa
+        
+        except Exception:
+            raise
             
