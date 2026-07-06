@@ -40,6 +40,7 @@ class TarefaService:
         
         except Exception:
             raise
+        
     
     def buscar_por_id(self, id_usuario: int):
         tarefa = self.repository.buscar_por_id(id_usuario)
@@ -51,5 +52,18 @@ class TarefaService:
             return tarefa
         
         except Exception:
+            raise
+    
+    
+    def deletar(self, id_usuario: int):
+        tarefa = self.buscar_por_id(id_usuario)
+        
+        try:
+            self.repository.deletar(tarefa)
+            self.repository.commit()
+            return tarefa
+        
+        except Exception:
+            self.repository.rollback()
             raise
             
