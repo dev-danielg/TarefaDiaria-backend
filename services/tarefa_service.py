@@ -13,7 +13,7 @@ class TarefaService:
     def cadastrar(self, dados: dict, id_usuario: int) -> Tarefa:
         titulo = dados.get("titulo")
         descricao = dados.get("descricao")
-            
+        
         if not titulo:
             raise ValueError("Tarefa deve conter ao menos o título.")
 
@@ -47,6 +47,9 @@ class TarefaService:
         
         if not tarefa:
             raise LookupError("Tarefa específica não encontrada.")
+        
+        if tarefa.id_usuario != id_usuario:
+            raise ValueError("Acesso negado.")
         
         try:
             return tarefa

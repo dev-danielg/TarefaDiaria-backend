@@ -25,3 +25,12 @@ def buscar_todos():
     service = TarefaService(repository)
     controller = TarefaController(repository, service)
     return controller.buscar_todos()
+
+
+@bp.route("/<int:id>", methods=["POST"])
+@jwt_required()
+def deletar():
+    repository = TarefaRepository(db.session)
+    service = TarefaService(repository)
+    controller = TarefaController(repository, service)
+    return controller.deletar()

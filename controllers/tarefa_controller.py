@@ -10,6 +10,7 @@ class TarefaController:
         self.repository = repository
         self.service = service
     
+    
     def cadastrar(self) -> tuple[dict[str, str | object], int]:
         try:
             tarefa = self.service.cadastrar(request.get_json(), int(get_jwt_identity()))
@@ -37,6 +38,7 @@ class TarefaController:
                 "concluida": tarefa.concluida
             }
         }, 201
+    
         
     def buscar_todos(self) -> tuple[dict[str, str | object], int]:
         try:
@@ -58,5 +60,40 @@ class TarefaController:
                 "descricao": tarefa.descricao,
                 "concluida": tarefa.concluida
             } for tarefa in tarefas]
+        }, 200
+        
+    
+    def deletar(self):
+        try:
+            tarefa = self.service.buscar_por_id(int(get_jwt_identity()))
+            
+        except ValueError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }, 403
+        
+        except LookupError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }, 404
+            
+        except Exception:
+            return {
+                "success": False,
+                "message": "Erro interno no servidor."
+            }, 500
+            
+        return {
+            "success": True,
+            "message": "Tarefa deletada com sucesso.",
+            "data": {
+                "id": tarefa.id,
+                "id_usuario": tarefa.id_usuario,
+                "titulo": tarefa.titulo,
+                "descricao": tarefa.descricao,
+                "concluida": tarefa.concluida
+            }
         }, 200
         
