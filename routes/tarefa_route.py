@@ -19,7 +19,6 @@ def cadastrar():
 
 
 @bp.route("", methods=["GET"])
-@jwt_required()
 def buscar_todos():
     repository = TarefaRepository(db.session)
     service = TarefaService(repository)
@@ -27,10 +26,10 @@ def buscar_todos():
     return controller.buscar_todos()
 
 
-@bp.route("", methods=["DELETE"])
+@bp.route("/<id_tarefa:int>", methods=["DELETE"])
 @jwt_required()
-def deletar():
+def deletar(id_tarefa: int):
     repository = TarefaRepository(db.session)
     service = TarefaService(repository)
     controller = TarefaController(repository, service)
-    return controller.deletar()
+    return controller.deletar(id_tarefa)
