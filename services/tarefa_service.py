@@ -33,17 +33,17 @@ class TarefaService:
             raise
         
         
-    def buscar_todos(self, id_usuario: int) -> Sequence[Tarefa]:
+    def buscar_todos(self) -> Sequence[Tarefa]:
         try:
-            tarefas = self.repository.buscar_todos(id_usuario)
+            tarefas = self.repository.buscar_todos()
             return tarefas
         
         except Exception:
             raise
         
     
-    def buscar_por_id(self, id_usuario: int):
-        tarefa = self.repository.buscar_por_id(id_usuario)
+    def buscar_por_id(self, id_tarefa: int, id_usuario: int) -> Tarefa:
+        tarefa = self.repository.buscar_por_id(id_tarefa)
         
         if not tarefa:
             raise LookupError("Tarefa específica não encontrada.")
@@ -58,8 +58,8 @@ class TarefaService:
             raise
     
     
-    def deletar(self, id_usuario: int):
-        tarefa = self.buscar_por_id(id_usuario)
+    def deletar(self, id_tarefa:int, id_usuario: int):
+        tarefa = self.buscar_por_id(id_tarefa, id_usuario)
         
         try:
             self.repository.deletar(tarefa)
