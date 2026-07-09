@@ -27,7 +27,7 @@ def buscar_todos():
     return controller.buscar_todos()
 
 
-@bp.route("/<int:id>", methods=["POST"])
+@bp.route("", methods=["DELETE"])
 @jwt_required()
 def deletar():
     repository = TarefaRepository(db.session)
