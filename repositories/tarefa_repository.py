@@ -10,13 +10,13 @@ class TarefaRepository:
         self.session = session
         
     
-    def buscar_por_id(self, id: int) -> Tarefa | None:
-        query = select(Tarefa).where(Tarefa.id == id)
+    def buscar_por_id(self, id_tarefa: int) -> Tarefa | None:
+        query = select(Tarefa).where(Tarefa.id == id_tarefa)
         return self.session.execute(query).scalar_one_or_none()
     
     
-    def buscar_todos(self, id_usuario: int) -> Sequence[Tarefa]:
-        query = select(Tarefa).where(Tarefa.id_usuario == id_usuario)
+    def buscar_todos(self) -> Sequence[Tarefa]:
+        query = select(Tarefa)
         return self.session.execute(query).scalars().all()
     
     
