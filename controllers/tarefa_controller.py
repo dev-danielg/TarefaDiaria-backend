@@ -42,7 +42,7 @@ class TarefaController:
         
     def buscar_todos(self) -> tuple[dict[str, str | object], int]:
         try:
-            tarefas = self.service.buscar_todos(int(get_jwt_identity()))
+            tarefas = self.service.buscar_todos()
             
         except Exception:
             return {
@@ -63,9 +63,9 @@ class TarefaController:
         }, 200
         
     
-    def deletar(self):
+    def deletar(self, id_tarefa: int) -> tuple[dict[str, str | object], int]:
         try:
-            tarefa = self.service.buscar_por_id(int(get_jwt_identity()))
+            tarefa = self.service.deletar(id_tarefa, int(get_jwt_identity()))
             
         except ValueError as e:
             return {
@@ -84,7 +84,7 @@ class TarefaController:
                 "success": False,
                 "message": "Erro interno no servidor."
             }, 500
-            
+        
         return {
             "success": True,
             "message": "Tarefa deletada com sucesso.",
