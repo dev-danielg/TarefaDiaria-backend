@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from models import Usuario, Tarefa
 import os
 from dotenv import load_dotenv
@@ -8,6 +9,7 @@ from routes import bp_tarefa, bp_auth, bp_usuario
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 load_dotenv()
