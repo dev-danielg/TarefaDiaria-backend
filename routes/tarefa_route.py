@@ -33,3 +33,12 @@ def deletar(id_tarefa: int):
     service = TarefaService(repository)
     controller = TarefaController(repository, service)
     return controller.deletar(id_tarefa)
+
+
+@bp.route("/<int:id_tarefa>", methods=["PUT"])
+@jwt_required()
+def atualizar(id_tarefa: int):
+    repository = TarefaRepository(db.session)
+    service = TarefaService(repository)
+    controller = TarefaController(repository, service)
+    return controller.atualizar(id_tarefa)
