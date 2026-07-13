@@ -69,4 +69,16 @@ class TarefaService:
         except Exception:
             self.repository.rollback()
             raise
-            
+        
+    
+    def atualizar(self, id_tarefa, id_usuario: int):
+        tarefa = self.buscar_por_id(id_tarefa, id_usuario)
+        
+        try:
+            self.repository.atualizar(tarefa)
+            self.repository.commit()
+            return tarefa
+        
+        except Exception:
+            self.repository.rollback
+            raise
