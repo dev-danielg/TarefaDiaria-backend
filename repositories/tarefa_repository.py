@@ -15,7 +15,7 @@ class TarefaRepository:
         return self.session.execute(query).scalar_one_or_none()
     
     
-    def buscar_todos(self, titulo: str | None, concluida = int | None) -> Sequence[Tarefa]:
+    def buscar_todos(self, titulo: str | None, concluida: int | None) -> Sequence[Tarefa]:
         query = select(Tarefa)
         
         if titulo:
