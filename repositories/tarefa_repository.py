@@ -19,7 +19,7 @@ class TarefaRepository:
         query = select(Tarefa)
         
         if titulo:
-            query = query.where(Tarefa.titulo == titulo)
+            query = query.where(Tarefa.titulo.ilike(titulo))
         if concluida:
             query = query.where(Tarefa.concluida == concluida)
             
