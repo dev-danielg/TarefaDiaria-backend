@@ -33,9 +33,12 @@ class TarefaService:
             raise
         
         
-    def buscar_todos(self) -> Sequence[Tarefa]:
+    def buscar_todos(self, titulo: str | None, concluida: str | int | None) -> Sequence[Tarefa]:
+        titulo = titulo.strip().lower() if titulo is not None and titulo != "" else None
+        concluida = int(concluida) if concluida is not None and concluida != "" else None
+        
         try:
-            tarefas = self.repository.buscar_todos()
+            tarefas = self.repository.buscar_todos(titulo, concluida)
             return tarefas
         
         except Exception:
