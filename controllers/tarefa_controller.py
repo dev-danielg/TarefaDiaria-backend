@@ -41,8 +41,11 @@ class TarefaController:
     
         
     def buscar_todos(self) -> tuple[dict[str, str | object], int]:
+        titulo = request.args.get("titulo")
+        concluida = request.args.get("concluida")
+        
         try:
-            tarefas = self.service.buscar_todos()
+            tarefas = self.service.buscar_todos(titulo, concluida)
             
         except Exception:
             return {
