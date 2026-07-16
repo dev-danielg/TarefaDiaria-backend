@@ -32,7 +32,7 @@ class TarefaService:
             raise
         
         
-    def buscar_todos(self, titulo: str | None, concluida: int | None, id_usuario_route: int, id_usuario_jwt: int) -> Sequence[Tarefa]:
+    def buscar_todos(self, titulo: str | None, concluida: str | None, id_usuario_route: int, id_usuario_jwt: int) -> Sequence[Tarefa]:
         if id_usuario_jwt != id_usuario_route:
             raise ValueError("Acesso negado.")
         
