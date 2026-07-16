@@ -40,12 +40,12 @@ class TarefaController:
         }, 201
     
         
-    def buscar_todos(self) -> tuple[dict[str, str | object], int]:
+    def buscar_todos(self, id_usuario: int) -> tuple[dict[str, str | object], int]:
         titulo = request.args.get("titulo")
         concluida = request.args.get("concluida")
         
         try:
-            tarefas = self.service.buscar_todos(titulo, concluida)
+            tarefas = self.service.buscar_todos(titulo, concluida, id_usuario, int(get_jwt_identity()))
             
         except Exception:
             return {
