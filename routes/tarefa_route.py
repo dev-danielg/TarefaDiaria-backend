@@ -18,12 +18,13 @@ def cadastrar():
     return controller.cadastrar()
 
 
-@bp.route("", methods=["GET"])
-def buscar_todos():
+@bp.route("/<int:id_usuario>", methods=["GET"])
+@jwt_required()
+def buscar_todos(id_usuario: int):
     repository = TarefaRepository(db.session)
     service = TarefaService(repository)
     controller = TarefaController(repository, service)
-    return controller.buscar_todos()
+    return controller.buscar_todos(id_usuario)
 
 
 @bp.route("/<int:id_tarefa>", methods=["DELETE"])
