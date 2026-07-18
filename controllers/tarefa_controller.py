@@ -47,10 +47,22 @@ class TarefaController:
         try:
             tarefas = self.service.buscar_todos(titulo, concluida, id_usuario, int(get_jwt_identity()))
             
+        except ValueError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }, 403
+            
+        except LookupError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            },  404
+            
         except Exception:
             return {
                 "success": False,
-                "message": "Erro interno no servidor.",
+                "message": f"Erro interno no servidor",
             }, 500
         
         return {
