@@ -80,5 +80,5 @@ class TarefaService:
             return tarefa
         
         except Exception:
-            self.repository.rollback
+            self.repository.rollback()
             raise
