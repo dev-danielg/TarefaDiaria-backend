@@ -17,6 +17,9 @@ class UsuarioService:
         if not nome or not senha or not email:
             raise ValueError("Nome, email e senha são obrigatórios.")
         
+        nome = nome.strip()
+        email = email.strip().lower()
+        senha = senha.strip()
         usuario = self.repository.buscar_por_email(email)
         
         if usuario:
