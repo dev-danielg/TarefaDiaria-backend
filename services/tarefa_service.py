@@ -40,9 +40,6 @@ class TarefaService:
         if not tarefas:
             raise LookupError("Tarefas específicas não encontradas.")
         
-        if tarefas[0].id_usuario != id_usuario:
-            raise ValueError("Acesso negado.")
-        
         return tarefas
         
         
