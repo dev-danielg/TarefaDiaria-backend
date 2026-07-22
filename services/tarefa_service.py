@@ -32,19 +32,16 @@ class TarefaService:
             raise
         
         
-    def buscar_todos(self, titulo: str | None, concluida: str | None, id_usuario_route: int, id_usuario_jwt: int) -> Sequence[Tarefa]:
-        if id_usuario_jwt != id_usuario_route:
-            raise ValueError("Acesso negado.")
-        
-        id_usuario = id_usuario_route
-        
+    def buscar_todos(self, titulo: str | None, concluida: str | None, id_usuario: int) -> Sequence[Tarefa]:
         titulo = titulo.strip() if titulo is not None and titulo != "" else None
         int_concluida = int(concluida) if concluida is not None and concluida != "" else None
-        
         tarefas = self.repository.buscar_todos(titulo, int_concluida, id_usuario)
         
         if not tarefas:
             raise LookupError("Tarefas específicas não encontradas.")
+        
+        if tarefas[0].id_usuario != id_usuario:
+            raise ValueError("Acesso negado.")
         
         return tarefas
         
