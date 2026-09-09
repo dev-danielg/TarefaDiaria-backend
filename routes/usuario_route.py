@@ -14,3 +14,11 @@ def cadastrar():
     service = UsuarioService(repository)
     controller = UsuarioController(repository, service)
     return controller.cadastrar()
+
+
+bp.route("/<int:id_usuario", methods=["DELETE"])
+def deletar(id_usuario: int):
+    repository = UsuarioRepository(db.session)
+    service = UsuarioService(repository)
+    controller = UsuarioController(repository, service)
+    return controller.deletar(id_usuario)
