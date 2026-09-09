@@ -39,7 +39,7 @@ class UsuarioController:
     
     def deletar(self, id_usuario: int) -> tuple[dict[str, str | object], int]:
         try:
-            usuario = self.service.deletar(request.json(), int(get_jwt_identity()))
+            usuario = self.service.deletar(id_usuario, int(get_jwt_identity()))
         
         except ValueError as e:
             return {
