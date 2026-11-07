@@ -1,6 +1,7 @@
 from services import UsuarioService
 from repositories import UsuarioRepository
 from flask import request
+from flask_jwt_extended import get_jwt_identity
 
 
 class UsuarioController:
@@ -34,4 +35,37 @@ class UsuarioController:
                 "email": usuario.email
             }
         }, 201
+    
+    
+    def deletar(self, id_usuario: int) -> tuple[dict[str, str | object], int]:
+        try:
+            usuario = self.service.deletar(id_usuario, int(get_jwt_identity()))
+        
+        except ValueError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }, 403
+        
+        except LookupError as e:
+            return {
+                "success": False,
+                "message": str(e)
+            }, 404
+        
+        except Exception:
+            return {
+                "success": False,
+                "message": "Erro interno no servidor."
+            }, 500
+            
+        return {
+            "success": True,
+            "message": "Usuário deletado com sucesso.",
+            "data": {
+                "id": usuario.id,
+                "nome": usuario.nome,
+                "email": usuario.email
+            }
+        }, 200
         

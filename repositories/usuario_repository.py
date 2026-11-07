@@ -14,6 +14,10 @@ class UsuarioRepository:
         self.session.add(usuario)
     
     
+    def deletar(self, usuario: Usuario) -> None:
+        self.session.delete(usuario)
+        
+    
     def buscar_por_id(self, id: int) -> Usuario | None:
         query = select(Usuario).where(Usuario.id == id)
         return self.session.execute(query).scalar_one_or_none()

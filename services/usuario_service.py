@@ -37,6 +37,32 @@ class UsuarioService:
         except Exception:
             self.repository.rollback()
             raise
+    
+    def buscar_por_id(self, id_usuario, id_usuario_jwt) -> Usuario:
+        if id_usuario != id_usuario_jwt:
+            raise ValueError("Acesso negado.")
+        
+        usuario = self.repository.buscar_por_id(id_usuario)
+            
+        if not usuario:
+            raise LookupError("Usuário específico não encontrado.")
+            
+        return usuario
+        
+        
+        
+    def deletar(self, id_usuario: int, id_usuario_jwt: int):
+        usuario = self.buscar_por_id(id_usuario, id_usuario_jwt)
+        
+        try:
+            self.repository.deletar(usuario)
+            self.repository.commit()
+            return usuario
+        
+        except Exception:
+            self.repository.rollback()
+            raise
+        
             
             
         
